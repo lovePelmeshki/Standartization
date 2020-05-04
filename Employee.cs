@@ -42,7 +42,7 @@ namespace Standartization
             get => _position;
             set
             {
-                Position = value;
+                _position = value;
                 OnPropertyChanged("Position");
             }
         }
@@ -51,7 +51,7 @@ namespace Standartization
             get => _expirience;
             set
             {
-                Expirience = value;
+                _expirience = value;
                 OnPropertyChanged("Expirience");
             }
         }
@@ -60,7 +60,7 @@ namespace Standartization
             get => _education;
             set
             {
-                Education = value;
+                _education = value;
                 OnPropertyChanged("Education");
             }
         }

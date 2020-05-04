@@ -27,8 +27,9 @@ namespace Standartization
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            DataContext db = new DataContext();
-            db.Employees.Add(new Employee
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            List<Employee> db = mainWindow.db;
+            db.Add(new Employee
             {
                 SecondName = TextBox_SecondName.Text,
                 BirthdayDate = (DateTime)DatePicker_Birthday.SelectedDate,
@@ -36,9 +37,10 @@ namespace Standartization
                 Expirience = Double.Parse(TextBox_Expirience.Text),
                 Education = ComboBox_Education.Text
             }) ;
-            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            mainWindow._dataGrid.ItemsSource = db.Employees.ToList();
-            Close();
+            mainWindow.db = db;
+            mainWindow._dataGrid.ItemsSource = null;
+            mainWindow._dataGrid.ItemsSource = mainWindow.db;
+            
         }
     }
 }

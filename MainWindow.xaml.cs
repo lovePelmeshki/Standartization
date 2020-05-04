@@ -1,45 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Standartization
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    
+
     public partial class MainWindow : Window
     {
+        public List<Employee> db = new List<Employee>();
+
         public MainWindow()
         {
             InitializeComponent();
             FillData();
+            middleExpTextBox.Text = MiddleExpirience().ToString();
 
-    }
-    public void FillData()
-    {
-            DataContext db = new DataContext();
-            db.Employees.Add(new Employee()
+
+        }
+        public void FillData()
+        {
+            db.Add(new Employee()
             {
-                 SecondName = "Василий",
-                 BirthdayDate = DateTime.Parse("01.01.01"),
-                 Position = "Инженер",
-                 Expirience = 5,
-                 Education = "Высшее"
+                SecondName = "Василий",
+                BirthdayDate = DateTime.Parse("01.01.01"),
+                Position = "Инженер",
+                Expirience = 5,
+                Education = "Высшее"
             });
-            db.Employees.Add(new Employee()
+            db.Add(new Employee()
             {
                 SecondName = "Анатоле",
                 BirthdayDate = DateTime.Parse("01.01.01"),
@@ -47,16 +38,36 @@ namespace Standartization
                 Expirience = 100,
                 Education = "Среднее"
             });
-            db.SaveChanges();
-            _dataGrid.ItemsSource = db.Employees.ToList();
+            _dataGrid.ItemsSource = db;
+
         }
 
 
-
+        public double MiddleExpirience()
+        {
+            double result =0;
+            foreach (var e in db)
+            {
+                result += e.Expirience;
+            }
+            result /= db.Count;
+            return result;
+        }
         private void MainAddButton_Click(object sender, RoutedEventArgs e)
         {
             AddUserWindow addUserWindow = new AddUserWindow();
             addUserWindow.ShowDialog();
+        }
+
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            _dataGrid.ItemsSource = null;
+            _dataGrid.ItemsSource = db;
+        }
+
+        private void Window_Activated(object sender, EventArgs e)
+        {
+
         }
     }
 }

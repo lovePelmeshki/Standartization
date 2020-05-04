@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Standartization"
         mc:Ignorable="d"
-        Title="Список сотрудников" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+        Title="Список сотрудников" Height="450" Width="800" WindowStartupLocation="CenterScreen" Activated="Window_Activated">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -47,8 +47,7 @@
             </ComboBox>
             
         </StackPanel>
-        <DataGrid  x:Name="_dataGrid" Grid.Row="1" RowHeight="45" GridLinesVisibility="None" ItemsSource
-                   ">
+        <DataGrid  x:Name="_dataGrid" Grid.Row="1" RowHeight="45" GridLinesVisibility="None">
             
         </DataGrid>
         <Button x:Name="MainAddButton" Grid.Row="2" Height="36" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="auto" HorizontalAlignment="Center" MinWidth="64" Click="MainAddButton_Click">
@@ -56,6 +55,8 @@
                 <Image Source="Icons\addUser.png" HorizontalAlignment="Left" Margin="12,0,8,0" Width="18" Height="18"/>
                 <TextBlock Text="Добавить" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="0,0,16,0"/>
             </StackPanel>
-        </Button>        
+        </Button>
+        <Button x:Name="button" Content="Refresh" HorizontalAlignment="Left" Margin="128,55,0,0" VerticalAlignment="Top" Width="75" Click="button_Click"/>
+        <TextBox x:Name="middleExpTextBox" HorizontalAlignment="Left" Height="23" Margin="178,5,0,0" Grid.Row="2" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
     </Grid>
 </Window>
