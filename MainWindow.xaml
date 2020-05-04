@@ -1,0 +1,61 @@
+﻿<Window x:Class="Standartization.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Standartization"
+        mc:Ignorable="d"
+        Title="Список сотрудников" Height="450" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!--TEXT STACK PANEL-->
+        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="5,20,5,5">
+            <TextBlock  Height="20" Width="150" Text="Образование" TextAlignment="Center" VerticalAlignment="Bottom" />
+            <TextBlock  Height="20" Width="150" Text="Должность" TextAlignment="Center" />
+        </StackPanel>
+        
+        <!--COMBOBOX STACK PANEL-->
+        <StackPanel Orientation="Horizontal" Margin="5" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            <ComboBox x:Name="EducationComboBox" Margin="5" Height="35" Width="150" Text="Образование" 
+                      HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <!--BOX #1-->
+                <ComboBoxItem>
+                    <TextBlock Text="Высшее"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock Text="Средне-специальное"/>
+                </ComboBoxItem>
+            </ComboBox>
+            <!--BOX #2-->
+            <ComboBox x:Name="PositionComboBox" Margin="5" Height="35" Width="150" Text="Должность" VerticalContentAlignment="Center" HorizontalContentAlignment="Center">
+                <ComboBoxItem>
+                    <TextBlock Text="Мастер"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock Text="Инженер"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock Text="Рабочий"/>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock Text="Бухгалтер"/>
+                </ComboBoxItem>
+            </ComboBox>
+            
+        </StackPanel>
+        <DataGrid  x:Name="_dataGrid" Grid.Row="1" RowHeight="45" GridLinesVisibility="None" ItemsSource
+                   ">
+            
+        </DataGrid>
+        <Button x:Name="MainAddButton" Grid.Row="2" Height="36" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="auto" HorizontalAlignment="Center" MinWidth="64" Click="MainAddButton_Click">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="Icons\addUser.png" HorizontalAlignment="Left" Margin="12,0,8,0" Width="18" Height="18"/>
+                <TextBlock Text="Добавить" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="0,0,16,0"/>
+            </StackPanel>
+        </Button>        
+    </Grid>
+</Window>
