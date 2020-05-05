@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using System.Data.Entity;
 
+
 namespace Standartization
 {
-    public class Employee : INotifyPropertyChanged
+    public class Employee 
     {
         private string _secondName;
-        private DateTime _birthdayDate;
+        private string _birthdayDate;
         private string _position;
         private double _expirience;
         private string _education;
@@ -22,19 +23,15 @@ namespace Standartization
             set
             {
                 _secondName = value;
-                OnPropertyChanged("SecondName");
             }
         }
 
-
-
-        public DateTime BirthdayDate
+        public string BirthdayDate
         {
             get => _birthdayDate;
             set
             {
                 _birthdayDate = value;
-                OnPropertyChanged("BirthdayDate");
             }
         }
         public string Position
@@ -43,7 +40,6 @@ namespace Standartization
             set
             {
                 _position = value;
-                OnPropertyChanged("Position");
             }
         }
         public double Expirience
@@ -51,8 +47,7 @@ namespace Standartization
             get => _expirience;
             set
             {
-                _expirience = value;
-                OnPropertyChanged("Expirience");
+                    _expirience = value;  
             }
         }
         public string Education
@@ -61,16 +56,7 @@ namespace Standartization
             set
             {
                 _education = value;
-                OnPropertyChanged("Education");
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged([CallerMemberName]string prop = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
-        }
     }
-
-
 }

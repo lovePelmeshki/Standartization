@@ -16,7 +16,7 @@ namespace Standartization
         {
             InitializeComponent();
             FillData();
-            middleExpTextBox.Text = MiddleExpirience().ToString();
+ 
 
 
         }
@@ -25,7 +25,7 @@ namespace Standartization
             db.Add(new Employee()
             {
                 SecondName = "Василий",
-                BirthdayDate = DateTime.Parse("01.01.01"),
+                BirthdayDate = DateTime.Parse("01.01.01").ToShortDateString(),
                 Position = "Инженер",
                 Expirience = 5,
                 Education = "Высшее"
@@ -33,7 +33,7 @@ namespace Standartization
             db.Add(new Employee()
             {
                 SecondName = "Анатоле",
-                BirthdayDate = DateTime.Parse("01.01.01"),
+                BirthdayDate = DateTime.Parse("01.01.01").ToShortDateString(),
                 Position = "Рабочий",
                 Expirience = 100,
                 Education = "Среднее"

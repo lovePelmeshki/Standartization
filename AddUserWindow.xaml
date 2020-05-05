@@ -28,13 +28,83 @@
         </StackPanel>
         <!--INPUT STACK PANEL-->
         <StackPanel Margin="3.8,4.8,0,3.8" Orientation="Vertical" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Width="160">
-            <TextBox x:Name="TextBox_SecondName" Margin="5"  Width="150" Height="25" VerticalContentAlignment="Center"/>
-            <DatePicker x:Name="DatePicker_Birthday" Margin="5" Height="25" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"/>
-            <ComboBox Name="ComboBox_Position" Margin="5" Height="25"/>
-            <TextBox x:Name="TextBox_Expirience" Margin="5"  Width="150" Height="25" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-            <ComboBox Name="ComboBox_Education" Margin="5" Height="25"/>
+            <TextBox x:Name="TextBox_SecondName" 
+                     Margin="5"  
+                     Width="150" 
+                     Height="25" 
+                     VerticalContentAlignment="Center"
+                     TextInput="TextBox_SecondName_TextInput" KeyDown="TextBox_SecondName_KeyDown" >
+
+            </TextBox>
+            <DatePicker x:Name="DatePicker_Birthday" 
+                        Margin="5"
+                        Height="25" 
+                        HorizontalContentAlignment="Stretch" 
+                        VerticalContentAlignment="Stretch"
+                        FirstDayOfWeek="Monday">
+                <DatePicker.SelectedDate>
+                    <Binding Path="BirthdayDate"
+                             NotifyOnValidationError="True"
+                             UpdateSourceTrigger="Explicit">
+                        <Binding.ValidationRules>
+                            <local:BirhdayDateRule/>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+
+                    </Binding>
+                </DatePicker.SelectedDate>
+            </DatePicker>
+            <ComboBox Name="ComboBox_Position" Margin="5" Height="25">
+                <ComboBoxItem>
+                    <TextBlock>Мастер</TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>Инженер</TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>Рабочий</TextBlock>
+                </ComboBoxItem>
+            </ComboBox>
+            <TextBox x:Name="TextBox_Expirience"
+                     Validation.Error="TextBox_Expirience_Error"
+                     Margin="5"  
+                     Width="150" 
+                     Height="25" 
+                     VerticalContentAlignment="Center" 
+                     HorizontalContentAlignment="Center">
+                <TextBox.Text>
+                    <Binding Path="Expirience" 
+                             NotifyOnValidationError="True" 
+                             UpdateSourceTrigger="LostFocus">
+                        <Binding.ValidationRules>
+                            <local:ExpirienceRule/>
+                            <ExceptionValidationRule/>
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+            <ComboBox Name="ComboBox_Education" Margin="5" Height="25">
+                <ComboBoxItem>
+                    <TextBlock>Высшее</TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>Среднее специальное</TextBlock>
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    <TextBlock>Среднее</TextBlock>
+                </ComboBoxItem>
+            </ComboBox>
         </StackPanel>
-        <Button Margin="117,10.2,117,0" x:Name="AddButton" Grid.Row="2" Height="36" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="110" HorizontalAlignment="Center" MinWidth="64" Click="AddButton_Click">
+        <Button Margin="117,10.2,117,0" 
+                x:Name="AddButton" 
+                Grid.Row="2" 
+                Height="36" 
+                Grid.ColumnSpan="2" 
+                VerticalAlignment="Top" 
+                Width="110" 
+                HorizontalAlignment="Center" 
+                MinWidth="64" Click="AddButton_Click"
+                >
             <StackPanel Orientation="Horizontal">
                 <Image Source="Icons\addUser.png" HorizontalAlignment="Left" Margin="12,0,8,0" Width="18" Height="18"/>
                 <TextBlock Text="Добавить" VerticalAlignment="Center"  HorizontalAlignment="Center" Margin="0,0,16,0"/>
