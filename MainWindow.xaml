@@ -81,9 +81,17 @@
         </StackPanel>
         <DataGrid  x:Name="_dataGrid" 
                    Grid.Row="1" 
-                   RowHeight="45" 
+                   RowHeight="30" 
                    GridLinesVisibility="None"
-                   CanUserAddRows="False">
+                   CanUserAddRows="False"
+                   AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Фамилия" Width="150" Binding="{Binding Path=SecondName}"/>
+                <DataGridTextColumn Header="Дата рождения" Width="150" Binding="{Binding Path=BirthdayDate}"/>
+                <DataGridTextColumn Header="Должность" Width="150" Binding="{Binding Path=Position}"/>
+                <DataGridTextColumn Header="Стаж" Width="150" Binding="{Binding Path=Expirience}"/>
+                <DataGridTextColumn Header="Образование" Width="150" Binding="{Binding Path=Education}"/>
+            </DataGrid.Columns>
 
         </DataGrid>
         <Button x:Name="MainAddButton" 
@@ -110,7 +118,7 @@
         <Button x:Name="button"
                 Content="Refresh"
                 HorizontalAlignment="Left" 
-                Margin="122,39,0,0" 
+                Margin="118,39,0,0" 
                 VerticalAlignment="Top" 
                 Width="110"
                 Height="35"
