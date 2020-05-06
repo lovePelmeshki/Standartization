@@ -110,6 +110,7 @@ namespace Standartization
         {
             _dataGrid.ItemsSource = null;
             _dataGrid.ItemsSource = employees;
+            middleExpTextBox.Text = MiddleExpirience(employees.ToList()).ToString();
         }
         private void Window_Activated(object sender, EventArgs e)
         {
