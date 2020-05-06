@@ -1,17 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Standartization;
 
 namespace Standartization
 {
@@ -25,50 +16,60 @@ namespace Standartization
         {
             InitializeComponent();
             employee = new Employee();
-            this.DataContext = employee;
+            DataContext = employee;
 
-            DatePicker_Birthday.DisplayDateStart = new DateTime(1920, 1, 1); 
-            DatePicker_Birthday.DisplayDateEnd =  DateTime.Now.AddYears(-18);
+            //Установка ограничения на выбор даты рождения
+            DatePicker_Birthday.DisplayDateStart = new DateTime(1920, 1, 1);
+            DatePicker_Birthday.DisplayDateEnd = DateTime.Now.AddYears(-18);
+            //if ((TextBox_SecondName.Text.Length < 1) ||
+            //    DatePicker_Birthday.Text.Length < 1 ||
+            //    ComboBox_Position.Text.Length < 1 ||
+            //    TextBox_Expirience.Text.Length <= 1 ||
+            //    ComboBox_Education.Text.Length < 1)
+            //{
+            //    AddButton.IsEnabled = false;
+            //}
+            //else
+            //    AddButton.IsEnabled = true;
         }
 
+        // Обработка события нажатия на кнопку Добавить
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-            List<Employee> db = mainWindow.db;
-            db.Add(new Employee
+            List<Employee> employees = mainWindow.employees;
+            employees.Add(new Employee
             {
                 SecondName = TextBox_SecondName.Text,
                 BirthdayDate = DateTime.Parse(DatePicker_Birthday.Text).ToShortDateString(),
                 Position = ComboBox_Position.Text,
                 Expirience = Double.Parse(TextBox_Expirience.Text),
                 Education = ComboBox_Education.Text
-            }) ;
-            mainWindow.db = db;
+            });
+            mainWindow.employees = employees;
             mainWindow._dataGrid.ItemsSource = null;
-            mainWindow._dataGrid.ItemsSource = mainWindow.db;
+            mainWindow._dataGrid.ItemsSource = mainWindow.employees;
             Close();
-
-            
         }
 
+        // Сообщение об ошибке ввода в строку Стаж работы
         private void TextBox_Expirience_Error(object sender, ValidationErrorEventArgs e)
         {
             if (e.Action == ValidationErrorEventAction.Added)
                 MessageBox.Show(e.Error.ErrorContent.ToString());
         }
 
-
-
-        private void TextBox_SecondName_TextInput(object sender, TextCompositionEventArgs e)
+        //Проверка, является ли ввод в строку Фамилия цифрой
+        private void TextBox_SecondName_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            char inp = e.Text[0];
-            if (inp < 'А' || inp > 'Я')
+            if (Char.IsDigit(e.Text, 0))
                 e.Handled = true;
         }
 
-        private void TextBox_SecondName_KeyDown(object sender, KeyEventArgs e)
+        private void TextBox_Expirience_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            MessageBox.Show(e.Key.ToString());
+            if (!Char.IsDigit(e.Text, 0))
+                e.Handled = true;
         }
     }
 }

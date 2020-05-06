@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using System.Data.Entity;
-
-
-namespace Standartization
+﻿namespace Standartization
 {
-    public class Employee 
+    public class Employee
     {
         private string _secondName;
         private string _birthdayDate;
@@ -47,7 +37,8 @@ namespace Standartization
             get => _expirience;
             set
             {
-                    _expirience = value;  
+
+                _expirience = value;
             }
         }
         public string Education

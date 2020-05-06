@@ -31,10 +31,6 @@ namespace Standartization
             if ((expirience < Min) || (expirience > Max))
             {
                 return new ValidationResult(false, $"Опыт не входит в диапазон от {Min} до {Max}");
-            }
-            else if (double.IsNaN(expirience))
-            {
-                return new ValidationResult(false, "IsNan");
             } else
             return new ValidationResult(true, null);
         }

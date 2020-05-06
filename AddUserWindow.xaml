@@ -33,7 +33,7 @@
                      Width="150" 
                      Height="25" 
                      VerticalContentAlignment="Center"
-                     TextInput="TextBox_SecondName_TextInput" KeyDown="TextBox_SecondName_KeyDown" >
+                     PreviewTextInput="TextBox_SecondName_PreviewTextInput">
 
             </TextBox>
             <DatePicker x:Name="DatePicker_Birthday" 
@@ -71,13 +71,14 @@
                      Width="150" 
                      Height="25" 
                      VerticalContentAlignment="Center" 
-                     HorizontalContentAlignment="Center">
+                     HorizontalContentAlignment="Center"
+                     PreviewTextInput="TextBox_Expirience_PreviewTextInput">
                 <TextBox.Text>
                     <Binding Path="Expirience" 
                              NotifyOnValidationError="True" 
                              UpdateSourceTrigger="LostFocus">
                         <Binding.ValidationRules>
-                            <local:ExpirienceRule/>
+                            <local:ExpirienceRule />
                             <ExceptionValidationRule/>
                         </Binding.ValidationRules>
                     </Binding>

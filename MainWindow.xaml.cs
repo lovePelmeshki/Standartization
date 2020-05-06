@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
+using System.Linq;
 
 namespace Standartization
 {
@@ -10,47 +11,94 @@ namespace Standartization
 
     public partial class MainWindow : Window
     {
-        public List<Employee> db = new List<Employee>();
+        public List<Employee> employees = new List<Employee>();
 
         public MainWindow()
         {
             InitializeComponent();
             FillData();
- 
-
-
+            middleExpTextBox.Text = MiddleExpirience(employees).ToString();
         }
+        //заполнение таблицы начальными данными
         public void FillData()
         {
-            db.Add(new Employee()
+            employees.Add(new Employee()
             {
-                SecondName = "Василий",
-                BirthdayDate = DateTime.Parse("01.01.01").ToShortDateString(),
+                SecondName = "Иванов",
+                BirthdayDate = DateTime.Parse("02.11.01").ToShortDateString(),
                 Position = "Инженер",
                 Expirience = 5,
                 Education = "Высшее"
             });
-            db.Add(new Employee()
+            employees.Add(new Employee()
             {
-                SecondName = "Анатоле",
-                BirthdayDate = DateTime.Parse("01.01.01").ToShortDateString(),
+                SecondName = "Петров",
+                BirthdayDate = DateTime.Parse("01.02.98").ToShortDateString(),
+                Position = "Мастер",
+                Expirience = 3,
+                Education = "Высшее"
+            });
+            employees.Add(new Employee()
+            {
+                SecondName = "Сидоров",
+                BirthdayDate = DateTime.Parse("18.02.90").ToShortDateString(),
                 Position = "Рабочий",
-                Expirience = 100,
+                Expirience = 8,
+                Education = "Среднее специальное"
+            });
+            employees.Add(new Employee()
+            {
+                SecondName = "Толстой",
+                BirthdayDate = DateTime.Parse("13.05.71").ToShortDateString(),
+                Position = "Мастер",
+                Expirience = 12,
+                Education = "Высшее"
+            });
+            employees.Add(new Employee()
+            {
+                SecondName = "Путин",
+                BirthdayDate = DateTime.Parse("28.12.00").ToShortDateString(),
+                Position = "Рабочий",
+                Expirience = 30,
                 Education = "Среднее"
             });
-            _dataGrid.ItemsSource = db;
+            employees.Add(new Employee()
+            {
+                SecondName = "Гоголь",
+                BirthdayDate = DateTime.Parse("18.02.90").ToShortDateString(),
+                Position = "Рабочий",
+                Expirience = 5,
+                Education = "Среднее"
+            });
+            employees.Add(new Employee()
+            {
+                SecondName = "Моголь",
+                BirthdayDate = DateTime.Parse("13.05.71").ToShortDateString(),
+                Position = "Инженер",
+                Expirience = 3,
+                Education = "Высшее"
+            });
+            employees.Add(new Employee()
+            {
+                SecondName = "Ли",
+                BirthdayDate = DateTime.Parse("28.12.00").ToShortDateString(),
+                Position = "Мастер",
+                Expirience = 8,
+                Education = "Высшее"
+            });
+            _dataGrid.ItemsSource = employees;
 
         }
 
-
-        public double MiddleExpirience()
+        // Функция вычисления среднего опыта работы
+        public double MiddleExpirience(List<Employee> data)
         {
             double result =0;
-            foreach (var e in db)
+            foreach (var e in data)
             {
                 result += e.Expirience;
             }
-            result /= db.Count;
+            result /= data.Count;
             return result;
         }
         private void MainAddButton_Click(object sender, RoutedEventArgs e)
@@ -58,15 +106,36 @@ namespace Standartization
             AddUserWindow addUserWindow = new AddUserWindow();
             addUserWindow.ShowDialog();
         }
-
         private void button_Click(object sender, RoutedEventArgs e)
         {
             _dataGrid.ItemsSource = null;
-            _dataGrid.ItemsSource = db;
+            _dataGrid.ItemsSource = employees;
         }
-
         private void Window_Activated(object sender, EventArgs e)
         {
+
+        }
+
+
+        private void EducationComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            var emp = from c in employees
+                      where (c.Education == EducationComboBox.Text) && (c.Position==PositionComboBox.Text)
+                      select c;
+            _dataGrid.ItemsSource = null;
+            _dataGrid.ItemsSource = emp;
+            middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+
+        }
+
+        private void PositionComboBox_DropDownClosed(object sender, EventArgs e)
+        {
+            var emp = from c in employees
+                      where (c.Education == EducationComboBox.Text) && (c.Position == PositionComboBox.Text)
+                      select c;
+            _dataGrid.ItemsSource = null;
+            _dataGrid.ItemsSource = emp;
+            middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
 
         }
     }
