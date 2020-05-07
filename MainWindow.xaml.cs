@@ -91,7 +91,7 @@ namespace Standartization
         }
 
         // Функция вычисления среднего опыта работы
-        public double MiddleExpirience(List<Employee> data)
+        public double MiddleExpirience(List<Employee> data) 
         {
             double result =0;
             foreach (var e in data)
@@ -111,6 +111,8 @@ namespace Standartization
             _dataGrid.ItemsSource = null;
             _dataGrid.ItemsSource = employees;
             middleExpTextBox.Text = MiddleExpirience(employees.ToList()).ToString();
+            EducationComboBox.Text = "";
+            PositionComboBox.Text = "";
         }
         private void Window_Activated(object sender, EventArgs e)
         {
@@ -120,23 +122,55 @@ namespace Standartization
 
         private void EducationComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            var emp = from c in employees
-                      where (c.Education == EducationComboBox.Text) && (c.Position==PositionComboBox.Text)
-                      select c;
-            _dataGrid.ItemsSource = null;
-            _dataGrid.ItemsSource = emp;
-            middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+            //var emp = from c in employees
+            //          where (c.Education == EducationComboBox.Text) && (c.Position==PositionComboBox.Text)
+            //          select c;
+            //_dataGrid.ItemsSource = null;
+            //_dataGrid.ItemsSource = emp;
+            //middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+            if (string.IsNullOrWhiteSpace(PositionComboBox.Text))
+            {
+                var emp = from c in employees
+                          where (c.Education == EducationComboBox.Text)
+                          select c;
+                _dataGrid.ItemsSource = null;
+                _dataGrid.ItemsSource = emp;
+                middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+            }
+            else
+            {
+                var emp = from c in employees
+                          where (c.Education == EducationComboBox.Text) && (c.Position == PositionComboBox.Text)
+                          select c;
+                _dataGrid.ItemsSource = null;
+                _dataGrid.ItemsSource = emp;
+                middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+            }
 
         }
 
         private void PositionComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            var emp = from c in employees
-                      where (c.Education == EducationComboBox.Text) && (c.Position == PositionComboBox.Text)
-                      select c;
-            _dataGrid.ItemsSource = null;
-            _dataGrid.ItemsSource = emp;
-            middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+            if (string.IsNullOrWhiteSpace(EducationComboBox.Text))
+            {
+                var emp = from c in employees
+                          where (c.Position == PositionComboBox.Text)
+                          select c;
+                _dataGrid.ItemsSource = null;
+                _dataGrid.ItemsSource = emp;
+                middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+            }
+            else
+            {
+                var emp = from c in employees
+                          where (c.Education == EducationComboBox.Text) && (c.Position == PositionComboBox.Text)
+                          select c;
+                _dataGrid.ItemsSource = null;
+                _dataGrid.ItemsSource = emp;
+                middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+            }
+
+
 
         }
     }

@@ -40,7 +40,6 @@
                       Margin="5" 
                       Height="35" 
                       Width="150" 
-                      Text="Образование" 
                       HorizontalContentAlignment="Center" 
                       VerticalContentAlignment="Center" 
                       DropDownClosed="EducationComboBox_DropDownClosed" >
@@ -59,7 +58,6 @@
                       Margin="5"
                       Height="35" 
                       Width="150" 
-                      Text="Должность" 
                       VerticalContentAlignment="Center" 
                       HorizontalContentAlignment="Center" 
                       DropDownClosed="PositionComboBox_DropDownClosed"
