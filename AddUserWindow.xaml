@@ -46,11 +46,6 @@
                     <Binding Path="BirthdayDate"
                              NotifyOnValidationError="True"
                              UpdateSourceTrigger="Explicit">
-                        <Binding.ValidationRules>
-                            <local:BirhdayDateRule/>
-                            <ExceptionValidationRule/>
-                        </Binding.ValidationRules>
-
                     </Binding>
                 </DatePicker.SelectedDate>
             </DatePicker>
