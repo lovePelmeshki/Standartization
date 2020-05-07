@@ -101,11 +101,14 @@ namespace Standartization
             result /= data.Count;
             return result;
         }
+        //обработка события на нажатие кнопки Добавить
         private void MainAddButton_Click(object sender, RoutedEventArgs e)
         {
             AddUserWindow addUserWindow = new AddUserWindow();
             addUserWindow.ShowDialog();
         }
+
+        //обработка события на нажатие кнопки Refresh
         private void button_Click(object sender, RoutedEventArgs e)
         {
             _dataGrid.ItemsSource = null;
@@ -114,20 +117,11 @@ namespace Standartization
             EducationComboBox.Text = "";
             PositionComboBox.Text = "";
         }
-        private void Window_Activated(object sender, EventArgs e)
-        {
 
-        }
-
-
+        //обработка события закрытие EducationComboBox
         private void EducationComboBox_DropDownClosed(object sender, EventArgs e)
         {
-            //var emp = from c in employees
-            //          where (c.Education == EducationComboBox.Text) && (c.Position==PositionComboBox.Text)
-            //          select c;
-            //_dataGrid.ItemsSource = null;
-            //_dataGrid.ItemsSource = emp;
-            //middleExpTextBox.Text = MiddleExpirience(emp.ToList()).ToString();
+
             if (string.IsNullOrWhiteSpace(PositionComboBox.Text))
             {
                 var emp = from c in employees
@@ -149,6 +143,7 @@ namespace Standartization
 
         }
 
+        //обработка события закрытие PositionComboBox
         private void PositionComboBox_DropDownClosed(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(EducationComboBox.Text))

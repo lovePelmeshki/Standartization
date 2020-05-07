@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,16 +22,7 @@ namespace Standartization
             //Установка ограничения на выбор даты рождения
             DatePicker_Birthday.DisplayDateStart = new DateTime(1920, 1, 1);
             DatePicker_Birthday.DisplayDateEnd = DateTime.Now.AddYears(-18);
-            //if ((TextBox_SecondName.Text.Length < 1) ||
-            //    DatePicker_Birthday.Text.Length < 1 ||
-            //    ComboBox_Position.Text.Length < 1 ||
-            //    TextBox_Expirience.Text.Length <= 1 ||
-            //    ComboBox_Education.Text.Length < 1)
-            //{
-            //    AddButton.IsEnabled = false;
-            //}
-            //else
-            //    AddButton.IsEnabled = true;
+
         }
 
         // Обработка события нажатия на кнопку Добавить
@@ -49,6 +41,7 @@ namespace Standartization
             mainWindow.employees = employees;
             mainWindow._dataGrid.ItemsSource = null;
             mainWindow._dataGrid.ItemsSource = mainWindow.employees;
+            mainWindow.middleExpTextBox.Text = mainWindow.MiddleExpirience(employees.ToList()).ToString();
             Close();
         }
 
